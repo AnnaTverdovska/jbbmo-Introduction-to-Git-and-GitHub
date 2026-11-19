@@ -12,6 +12,7 @@ enhancements, and ideas are welcome.
    shellcheck simple-interest.sh tests/*.sh
    bash tests/test-simple-interest.sh
    pytest
+   node --test tests/interest.test.mjs
    ```
 4. Open a pull request describing what you changed and why.
 

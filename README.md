@@ -2,9 +2,11 @@
 
 [![CI](https://github.com/AnnaTverdovska/jbbmo-Introduction-to-Git-and-GitHub/actions/workflows/ci.yml/badge.svg)](https://github.com/AnnaTverdovska/jbbmo-Introduction-to-Git-and-GitHub/actions/workflows/ci.yml)
 
-Two small command-line calculators, one in Bash and one in Python. The repository
-started as the lab project of the IBM *Introduction to Git and GitHub* course; the
-original scripts are by Upkar Lidder (IBM).
+Interest calculators: a web page, plus two small command-line versions in Bash and
+Python. The repository started as the lab project of the IBM *Introduction to Git and
+GitHub* course; the original scripts are by Upkar Lidder (IBM).
+
+[![The web calculator next to a chart of simple vs compound interest](docs/screenshot.png)](https://annatverdovska.github.io/jbbmo-Introduction-to-Git-and-GitHub/)
 
 | Script | Calculates | Formula |
 |---|---|---|
@@ -13,7 +15,22 @@ original scripts are by Upkar Lidder (IBM).
 
 `p` is the principal, `r` the annual interest rate in percent and `t` the time in years.
 
-## Usage
+## Web version
+
+**[Open the calculator](https://annatverdovska.github.io/jbbmo-Introduction-to-Git-and-GitHub/)**: type in an
+amount, a yearly rate and a number of years, switch between simple and compound interest, and
+see on a chart how far compounding pulls ahead, year by year.
+
+It is a static page in [`docs/`](docs) (HTML, CSS and JavaScript, no build step), served by
+GitHub Pages. The formulas live in [`docs/interest.js`](docs/interest.js) and are tested against
+the same numbers as the command-line scripts. To try it locally:
+
+```bash
+python -m http.server --directory docs
+# then open http://localhost:8000
+```
+
+## Command-line usage
 
 Both scripts ask for the values when started without arguments, or take them on the
 command line:
@@ -35,6 +52,7 @@ argument order: the Python script keeps the original `p, t, r` order.
 ```bash
 bash tests/test-simple-interest.sh
 pip install pytest && pytest
+node --test tests/interest.test.mjs
 ```
 
 The tests and [ShellCheck](https://www.shellcheck.net/) run on every push and pull
@@ -47,3 +65,5 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) and the [Code of Conduct](CODE_OF_CONDUCT
 ## License
 
 [Apache License 2.0](LICENSE). Original lab material © IBM Developer Skills Network.
+The web page uses the [Bricolage Grotesque](https://github.com/ateliertriay/bricolage) typeface,
+included under the [SIL Open Font License](docs/fonts/OFL.txt).
