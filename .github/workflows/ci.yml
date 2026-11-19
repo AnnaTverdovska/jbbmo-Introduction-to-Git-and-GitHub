@@ -21,3 +21,8 @@ jobs:
         run: bash tests/test-simple-interest.sh
       - name: Test the Python calculator
         run: pytest -v
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Test the web calculator's formulas
+        run: node --test tests/interest.test.mjs

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Interest calculator: simple vs compound</title>
+  <meta name="description" content="A calculator for simple and compound interest that shows how far compounding pulls ahead, year by year.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231b2438'/%3E%3Crect x='5' y='5' width='22' height='9' rx='2' fill='%23dde9e0'/%3E%3Ccircle cx='10' cy='20' r='2.4' fill='%23f2f5f3'/%3E%3Ccircle cx='16' cy='20' r='2.4' fill='%23f2f5f3'/%3E%3Ccircle cx='22' cy='20' r='2.4' fill='%230d7558'/%3E%3C/svg%3E">
+  <link rel="preload" href="fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <main class="layout">
+    <section class="device" aria-labelledby="title">
+      <h1 id="title" class="device-title">Interest calculator</h1>
+
+      <div class="display">
+        <p class="mode-line" id="mode-line">Compound interest</p>
+
+        <div class="entries" role="group" aria-label="Values">
+          <button type="button" class="entry" data-field="principal" aria-pressed="true">
+            <span class="entry-label">Amount</span>
+            <span class="entry-value"><span data-value="principal">1000</span></span>
+          </button>
+          <button type="button" class="entry" data-field="rate" aria-pressed="false">
+            <span class="entry-label">Rate per year</span>
+            <span class="entry-value"><span data-value="rate">5</span>&#8239;%</span>
+          </button>
+          <button type="button" class="entry" data-field="years" aria-pressed="false">
+            <span class="entry-label">Years</span>
+            <span class="entry-value"><span data-value="years">20</span></span>
+          </button>
+        </div>
+
+        <output class="result" id="result" aria-live="polite">1,653.30</output>
+        <p class="result-note" id="result-note">interest earned, final balance 2,653.30</p>
+        <p class="error" id="error" role="alert" hidden></p>
+      </div>
+
+      <div class="keypad" role="group" aria-label="Keypad">
+        <button type="button" class="key field" data-select="principal" aria-pressed="true">Amount</button>
+        <button type="button" class="key field" data-select="rate" aria-pressed="false">Rate&#8239;%</button>
+        <button type="button" class="key field" data-select="years" aria-pressed="false">Years</button>
+        <button type="button" class="key fn" data-action="clear" aria-label="Clear this value">AC</button>
+
+        <button type="button" class="key digit" data-digit="7">7</button>
+        <button type="button" class="key digit" data-digit="8">8</button>
+        <button type="button" class="key digit" data-digit="9">9</button>
+        <button type="button" class="key fn" data-action="back" aria-label="Delete last digit">&#9003;</button>
+
+        <button type="button" class="key digit" data-digit="4">4</button>
+        <button type="button" class="key digit" data-digit="5">5</button>
+        <button type="button" class="key digit" data-digit="6">6</button>
+        <button type="button" class="key mode" data-mode="simple" aria-pressed="false">Simple</button>
+
+        <button type="button" class="key digit" data-digit="1">1</button>
+        <button type="button" class="key digit" data-digit="2">2</button>
+        <button type="button" class="key digit" data-digit="3">3</button>
+        <button type="button" class="key mode" data-mode="compound" aria-pressed="true">Compound</button>
+
+        <button type="button" class="key digit zero" data-digit="0">0</button>
+        <button type="button" class="key digit" data-digit="." aria-label="Decimal point">.</button>
+        <button type="button" class="key next" data-action="next">Next</button>
+      </div>
+
+      <p class="hint">You can also type on your keyboard. Enter moves to the next value.</p>
+    </section>
+
+    <section class="explain">
+      <p class="difference" id="difference">
+        Compound interest earns <strong>653.30</strong> more than simple interest here, because each year’s interest earns interest too.
+      </p>
+
+      <figure class="chart">
+        <svg id="chart" viewBox="0 0 720 380" role="img" aria-labelledby="chart-caption"></svg>
+        <figcaption id="chart-caption">Balance over the years: simple interest grows in a straight line, compound interest curves upwards. The shaded gap is what compounding adds.</figcaption>
+      </figure>
+
+      <details class="ledger">
+        <summary>Year by year</summary>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Year</th><th scope="col">Simple balance</th><th scope="col">Compound balance</th><th scope="col">Difference</th></tr>
+            </thead>
+            <tbody id="ledger-body"></tbody>
+          </table>
+        </div>
+      </details>
+
+      <section class="method">
+        <h2>How it’s calculated</h2>
+        <p><strong>Simple interest</strong> is paid only on the amount you started with, so it grows by the same sum every year: <code>p × r × t / 100</code>.</p>
+        <p><strong>Compound interest</strong> is added to the balance once a year, and the next year’s interest is calculated on that larger balance: <code>p × (1 + r/100)<sup>t</sup> − p</code>.</p>
+        <p><code>p</code> is the amount, <code>r</code> the yearly rate in percent and <code>t</code> the number of years. The command-line versions in this repository, <code>simple-interest.sh</code> and <code>compound_interest.py</code>, use the same formulas.</p>
+      </section>
+    </section>
+  </main>
+
+  <footer>
+    <p>This repository started as the lab project of IBM’s <em>Introduction to Git and GitHub</em> course; the original scripts are by Upkar Lidder (IBM). Apache License 2.0. <a href="https://github.com/AnnaTverdovska/jbbmo-Introduction-to-Git-and-GitHub">Source on GitHub</a>.</p>
+    <p>Sample calculations only, not financial advice.</p>
+  </footer>
+</body>
+</html>
