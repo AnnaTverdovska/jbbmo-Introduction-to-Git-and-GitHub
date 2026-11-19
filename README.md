@@ -62,6 +62,15 @@ request through GitHub Actions.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) and the [Code of Conduct](CODE_OF_CONDUCT.md).
 
+## Changes to the IBM lab
+
+This repository is a fork of IBM Skills Network's `jbbmo-Introduction-to-Git-and-GitHub` lab,
+licensed under the Apache License 2.0. All changes were made in 2026 by AnnaTverdovska and are
+listed in the commit history. Changed from the original: `README.md`, `CONTRIBUTING.md`,
+`CODE_OF_CONDUCT.md`, `.gitignore`, `simple-interest.sh` and `compound_interest.py` (both also
+note their changes in their first lines); removed: `.github/workflows/close_pr.yml`. Everything
+in `docs/` and `tests/` and the CI workflow are new.
+
 ## License
 
 [Apache License 2.0](LICENSE). Original lab material © IBM Developer Skills Network.

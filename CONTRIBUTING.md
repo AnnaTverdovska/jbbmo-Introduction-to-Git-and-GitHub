@@ -17,3 +17,7 @@ enhancements, and ideas are welcome.
 4. Open a pull request describing what you changed and why.
 
 By participating you agree to follow the [Code of Conduct](CODE_OF_CONDUCT.md).
+
+---
+
+_Modified 2026 by AnnaTverdovska. Original: IBM Skills Network lab (Apache License 2.0)._
